@@ -1,0 +1,69 @@
+﻿@model FirstCoreApp.Models.News
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="mt-4">Create</h1>
+
+<h4>News</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic" class="control-label"></label>
+                <textarea asp-for="Topic" class="form-control" style="height:200px;"></textarea>
+                <span asp-validation-for="Topic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="File" class="control-label"></label>
+                <input asp-for="File" type="file" class="form-control" 
+                       accept="image/*"
+                       class="custom-file-input"
+                       id="oneImg"
+                       onchange="MyImage()"
+                       />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="ShowImage">
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="Date"  class="control-label"></label>
+                <input asp-for="Date"  class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="category.Name" class="control-label">Select Category</label>
+                <select asp-for="categoryId" class ="form-control" asp-items="ViewBag.categoryId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                &nbsp;
+                <a asp-action="Index" class="btn btn-danger">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script>
+    function MyImage() {
+        file = window.oneImg
+        if (file.files.length > 0) {
+            name = file.files[0].name;
+            imgPath = window.URL.createObjectURL(file.files[0]);
+            window.ShowImage.innerHTML = "<img src='" + imgPath + "' alt='" + name + "' style='height:150px;width:150px;object-fit:cover;' />";
+        } else window.ShowImage.innerHTML = "<label>No Image Selected</label>";
+    }
+</script>

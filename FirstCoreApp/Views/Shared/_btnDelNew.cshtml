@@ -1,0 +1,5 @@
+﻿@if (User.IsInRole("SuperAdmin"))
+{
+    <a href="/Home/DeleteNew/@Model.Id" class="btn btn-success">Delete</a>
+}
+

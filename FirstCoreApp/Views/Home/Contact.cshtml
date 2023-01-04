@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model ContactUs
+
+@{
+    ViewData["Title"] = "ContactUs";
+}
+
+<center><h2 class="m-4">ContactUs</h2></center>
+
+<div class="container m-4">
+    <div class="col-8">
+        <form asp-action="Contact" method="post">
+            <div class="form-row">
+                <div class="col form-group">
+                    <input type="text" asp-for="Name" class="form-control" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" value="@{
+                        if (SignInManager.IsSignedIn(User))
+                            @User.Identity.Name.Split('@')[0]
+                    }" />
+                    <div class="validate"></div>
+                </div>
+                <div class="col form-group">
+                    <input type="email" asp-for="Email" class="form-control" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" value="@{
+                        if (SignInManager.IsSignedIn(User))
+                            @User.Identity.Name;
+
+                    }" />
+                    <div class="validate"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" asp-for="Subject" class="form-control" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
+                <div class="validate"></div>
+            </div>
+            <div class="form-group">
+                <textarea asp-for="Message" class="form-control" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                <div class="validate"></div>
+            </div>
+            <div class="mb-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+            </div>
+            <div class="text-center"><button type="submit" class="btn btn-success">Send Message</button></div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿@model News
+@{ 
+    ViewData["Title"] = @ViewBag.NewTitle;
+}
+
+<section id="about" class="about">
+    <div class="container aos-init aos-animate" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>@Model.Title</h2>
+            <p>@Model.Date</p>
+        </div>
+
+        <center>
+            <div class="row">
+
+                <div class="col-12 aos-init aos-animate" data-aos="fade-right">
+                    <img src="~/Images/News/@Model.Image" class="img-fluid" alt="@Model.Title" style="border-radius:50%;width:350px;height:350px;" />
+                </div>
+
+                <div class="col-sm-12 pt-4 pt-lg-0 content aos-init aos-animate" data-aos="fade-left">
+                    <p class="font-italic">
+                        @Model.Topic
+                        <div>
+                            <partial name="_btnDelNew" />
+                            <a href="/home/news/@Model.categoryId" class="btn btn-success">Back</a>
+
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </center>
+        <!---->
+    </div>
+</section>

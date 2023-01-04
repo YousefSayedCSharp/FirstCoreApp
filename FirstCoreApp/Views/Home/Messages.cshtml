@@ -1,0 +1,30 @@
+﻿@model List<ContactUs>
+
+@{
+    ViewData["Title"] = "All Messages";
+}
+
+<center><h2 class="m-4">Messages</h2></center>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-12">
+            <center>
+                <div style="width:300px;padding:5px;" class="m-2">
+                    <h4 class="title"><a href="">@item.Name</a></h4>
+                    <p style="width:100%; text-align:left;">@item.Message</p>
+                    <p>@item.Email</p>
+                    <p>@item.Subject</p>
+                </div>
+            </center>
+        </div>
+
+        <div class="col-12">
+            <div style="width:100%;">
+                <hr class="bg-white"/>
+            </div>
+            </div>
+            }
+        </div>

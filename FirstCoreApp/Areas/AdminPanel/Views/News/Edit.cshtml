@@ -1,0 +1,72 @@
+﻿@model FirstCoreApp.Models.News
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="mt-4">Edit</h1>
+
+<h4>News</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic" class="control-label"></label>
+                <textarea asp-for="Topic" class="form-control" style="height:200px;"></textarea>
+                <span asp-validation-for="Topic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="File" class="control-label"></label>
+                <input asp-for="File" type="file" class="form-control"
+                       accept="image/*"
+                       class="custom-file-input"
+                       id="oneImg"
+                       onchange="MyImage()" />
+                <span asp-validation-for="File" class="text-danger"></span>
+                <input asp-for="Image" class="form-control" hidden />
+            </div>
+            <div class="form-group" id="ShowImage">
+                <img src="~/Images/News/@Model.Image" alt="@Model.Title" style="height:150px;width:150px;object-fit:cover;" id="i" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="categoryId" class="control-label">Select Category</label>
+                <select asp-for="categoryId" class="form-control" asp-items="ViewBag.categoryId"></select>
+                <span asp-validation-for="categoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                &nbsp;
+                <a asp-action="Index" class="btn btn-danger">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script>
+    function MyImage() {
+        file = window.oneImg
+        if (file.files.length > 0) {
+            name = file.files[0].name;
+            imgPath = window.URL.createObjectURL(file.files[0]);
+            window.i.alt = name;
+            window.i.src = imgPath;
+        } else window.ShowImage.innerHTML = "<label>No Image Selected</label>";
+    }
+</script>

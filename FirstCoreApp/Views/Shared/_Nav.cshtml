@@ -1,0 +1,42 @@
+﻿<div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+            <i class="icofont-clock-time"></i> @DateTime.Now.ToString("dddd / MMMM / yyyy : hh:mm tt");
+        </div>
+        <div class="d-flex align-items-center">
+            <i class="icofont-phone"></i> Call us now +20 010 9867 3012
+        </div>
+    </div>
+</div>
+
+<header id="header" class="fixed-top">
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+        <a class="navbar-brand" href="/Home">Yousef Sayed</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <partial name="_btnAdmin" />
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/Home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Teammembers">Teammembers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <partial name="_AllMessages" />
+                </li>
+            </ul>
+            @*<span class="navbar-text">
+            Navbar text with an inline element
+        </span>*@
+            <partial name="_LoginPartial" />
+        </div>
+    </nav>
+</header>
